@@ -1,0 +1,30 @@
+      
+<!-- Main container -->
+<div>
+  <h1>{{ title }}</h1>
+
+  <button (click)="fetchData()">Refresh Data</button>
+
+  <div *ngIf="isLoading" style="text-align: center; padding: 20px;">
+    <em>Loading users...</em>
+  </div>
+
+  <h2 *ngIf="!isLoading">
+    Dashboard Summary: {{ getActiveUsersCount() }} active users
+  </h2>
+
+  <!-- The list of users -->
+  <div *ngIf="!isLoading && users">
+    <div *ngFor="let user of users" class="user-card">
+      <b>{{ user.name }}</b> - <span>{{ user.email }}</span>
+      <p>
+        Works at: {{ user.company.name }}
+      </p>
+      <div [id]="'status-' + user.id">Status: Active</div>
+      <button (click)="promoteUser(user)" [disabled]="user.promoted">Promote</button>
+    </div>
+  </div>
+
+</div>
+
+    
